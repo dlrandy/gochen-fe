@@ -1,5 +1,4 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable global-require */
+/* eslint-disable */
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const ImageminPlugin = require('imagemin-webpack'); // 手动压缩文件， 减少打包时间，也为了保证image的质量
@@ -20,7 +19,6 @@ const PurgecssPlugin = require('purgecss-webpack-plugin');
 const glob = require('glob');
 const workboxPlugin = require('workbox-webpack-plugin');
 
-
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const postcssNormalize = require('postcss-normalize');
@@ -40,15 +38,9 @@ const alias = [
   '@Utils',
   '@Common',
 ].reduce((obj, key) => {
-  obj[key] = path.resolve(
-    path.join(
-      './src',
-      key.substring(1).toLowerCase(),
-    ),
-  );
+  obj[key] = path.join(__dirname, 'src', key.substring(1).toLowerCase());
   return obj;
 }, {});
-
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
@@ -64,7 +56,17 @@ module.exports = {
     chunkFilename: 'js/[name].[contenthash:8].js',
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.png', '.jpg', 'jpeg', 'webp'],
+    extensions: [
+      '.ts',
+      '.tsx',
+      '.js',
+      '.jsx',
+      '.json',
+      '.png',
+      '.jpg',
+      'jpeg',
+      'webp',
+    ],
     alias,
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
   },

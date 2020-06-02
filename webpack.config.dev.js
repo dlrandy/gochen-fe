@@ -1,4 +1,4 @@
-/* eslint-disable global-require */
+/* eslint-disable */
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
@@ -23,15 +23,13 @@ const alias = [
   '@Utils',
 ].reduce((obj, key) => {
   const target = { ...obj };
-  target[key] = path.join('src', key.substring(1).toLowerCase());
+  target[key] = path.join(__dirname, 'src', key.substring(1).toLowerCase());
   return target;
 }, {});
-console.log(alias);
-
 module.exports = {
   mode: 'development',
   target: 'web',
-  entry: ['./src/index.ts'],
+  entry: ['./src/index'],
   devtool: 'inline-source-map',
   output: {
     path: path.resolve(__dirname, './dist'),

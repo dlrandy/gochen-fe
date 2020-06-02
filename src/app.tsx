@@ -1,5 +1,10 @@
 import React from 'react';
 
-// import TestComp from '@Components/test';
+import ChristmasTree from '@Components/chrismast_tree/index';
 
-export const App = () => <div>hello</div>;
+export const App = () => (
+  <div>
+    hello
+    <ChristmasTree />
+  </div>
+);

@@ -7,10 +7,12 @@ const render = () => {
   ReactDOM.render(<App />, document.getElementById('root'));
 };
 
-module.hot?.accept('./app', function () {
-  /* eslint-disable global-require */
-  const { NextApp } = require('./app');
-  ReactDOM.render(<NextApp />, document.getElementById('root'));
-});
-
+// eslint-disable-next-line no-unused-expressions
+module.hot?.accept();
+// ['./app'], function next() {
+//   /* eslint-disable global-require */
+//   const { NextApp } = require('./app');
+//   ReactDOM.render(<NextApp />, document.getElementById('root'));
+// });
+render();
 export default render;
