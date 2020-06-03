@@ -39,15 +39,16 @@ module.exports = {
     filename: '[name].[chunkhash:8].js',
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.png', '.jpg', 'jpeg', 'webp'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.png', '.jpg', 'jpeg', 'webp', 'svg'],
     alias,
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         use: [
-          // { loader: 'cache-loader' },
+          //      { loader: 'cache-loader' },
           // {
           //   loader: 'thread-loader',
           //   options: {
@@ -66,14 +67,14 @@ module.exports = {
         ],
         exclude: /node_modules/,
       },
-      {
-        test: /\.html$/,
-        use: [
-          {
-            loader: 'html-loader',
-          },
-        ],
-      },
+      // {
+      //   test: /\.html$/,
+      //   use: [
+      //     {
+      //       loader: 'html-loader',
+      //     },
+      //   ],
+      // },
       {
         test: /\.css$/,
         use: [
@@ -156,6 +157,9 @@ module.exports = {
     }),
     new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en|zh/),
     new HtmlWebpackPlugin({
+      externalJs: [],
+      externalCss: [],
+      cdnUrl: JSON.stringify('https://cdnjs.cloudflare.com/ajax/libs/'),
       template: path.resolve(__dirname, 'public', 'index.html'),
       favicon: path.resolve(__dirname, 'public', 'favicon.ico'),
       title: 'GOChen best practices',

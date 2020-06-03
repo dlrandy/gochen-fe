@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "doc":"typedoc --out docs /src",
+    "doc": "typedoc --out docs /src",
     "format": "prettier --write src/**/*.{js,jsx,ts,tsx}",
     "lintjs:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx}",
     "lint:js": "eslint --cache --fix src/**/*.{js,jsx,ts,tsx}",
@@ -47,7 +47,6 @@
     "eslint-plugin-compat": "^3.6.0",
     "file-loader": "6.0.0",
     "fork-ts-checker-webpack-plugin": "4.1.1",
-    "html-loader": "1.0.0",
     "html-webpack-plugin": "^4.3.0",
     "husky": "^4.2.5",
     "invariant": "2.2.4",

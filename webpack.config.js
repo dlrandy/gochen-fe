@@ -1,14 +1,6 @@
 /* eslint-disable */
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const ImageminPlugin = require('imagemin-webpack'); // 手动压缩文件， 减少打包时间，也为了保证image的质量
-// lossless
-// const imageminJpegtran = require('imagemin-jpegtran');
-// const imageminOptipng = require('imagemin-optipng');
-// lossy
-// const imageminMozjpeg = require('imagemin-mozjpeg');
-// const ImageminPlugin = require('imagemin-webpack-plugin').default;
-//  webpack-libs-optimizations
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -23,6 +15,11 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const postcssNormalize = require('postcss-normalize');
 
+const externalJs = [
+  'react/16.13.1/umd/react.production.min.js',
+  'react-dom/16.13.1/umd/react-dom.production.min.js',
+];
+const externalCss = {};
 const alias = [
   '@Actions',
   '@Assets',
@@ -47,7 +44,7 @@ module.exports = {
   mode: 'production',
   target: 'web',
   devtool: 'source-map',
-  entry: ['./index.ts'],
+  entry: ['./index'],
   output: {
     path: path.join(__dirname, './dist'),
     publicPath: '/',
@@ -66,9 +63,14 @@ module.exports = {
       '.jpg',
       'jpeg',
       'webp',
+      'svg',
     ],
     alias,
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+  },
+  externals: {
+    react: 'React',
+    'react-dom': 'ReactDOM',
   },
   module: {
     rules: [
@@ -86,21 +88,21 @@ module.exports = {
           {
             loader: 'ts-loader',
             options: {
-              // happyPackMode: true,
+              transpileOnly: true,
               configFile: 'tsconfig.json',
             },
           },
         ],
         exclude: /node_modules/,
       },
-      {
-        test: /\.html$/,
-        use: [
-          {
-            loader: 'html-loader',
-          },
-        ],
-      },
+      // {
+      //   test: /\.html$/,
+      //   use: [
+      //     {
+      //       loader: 'html-loader',
+      //     },
+      //   ],
+      // },
       {
         test: /\.css$/,
         use: [
@@ -151,9 +153,13 @@ module.exports = {
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new HtmlWebpackPlugin({
+      title: 'GOChen best practices',
+      externalJs,
+      externalCss,
+      cdnUrl: JSON.stringify('https://cdnjs.cloudflare.com/ajax/libs/'),
+      inject: true,
       template: path.resolve(__dirname, 'public', 'index.html'),
       favicon: path.resolve(__dirname, 'public', 'favicon.ico'),
-      title: 'GOChen best practices',
     }),
     new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /en|zh/),
     new MiniCssExtractPlugin({
