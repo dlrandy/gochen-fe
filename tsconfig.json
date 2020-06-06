@@ -16,6 +16,7 @@
       "@Assets/*": ["./assets/*"],
       "@Common/*": ["./common/*"],
       "@Components/*": ["./components/*"],
+      "@Contexts/*": ["./contexts/*"],
       "@Containers/*": ["./containers/*"],
       "@Epics/*": ["./epics/*"],
       "@Networks/*": ["./networks/*"],

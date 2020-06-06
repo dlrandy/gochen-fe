@@ -3,7 +3,6 @@ import React from 'react';
 const NEEDLE_CLASS = 'needle';
 
 function keyTag(strings: TemplateStringsArray, index: number, key: number) {
-  console.log(strings, 'strings');
   return `${index}${key}`;
 }
 
@@ -15,6 +14,7 @@ export default function NakedTree({ rowCount = 3 }) {
       tree.push(<span key={keyTag`${i}${key}`}>&nbsp;&nbsp;</span>);
       key += 1;
     }
+    key += 1;
     for (let k = 1; k < 2 * i; k++) {
       tree.push(
         <span key={keyTag`${i}${key}`} className={NEEDLE_CLASS}>
@@ -23,7 +23,8 @@ export default function NakedTree({ rowCount = 3 }) {
       );
       key += 1;
     }
-    tree.push(<br />);
+    key += 1;
+    tree.push(<br key={`br-${key}`} />);
   }
 
   return <div>{tree}</div>;

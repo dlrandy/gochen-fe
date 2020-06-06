@@ -8,6 +8,10 @@ git config --global core.autocrlf false
 ```
 
 ### todo list
-- [ ] 基础开发环境搭建
+- [x] 基础开发环境搭建
+- [x] 引入react-router-v6
+- [x] 路由守卫
+- [ ] react-router preloading
+- [ ] react-router focus management
 
 

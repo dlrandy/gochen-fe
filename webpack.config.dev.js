@@ -12,6 +12,7 @@ const alias = [
   '@Actions',
   '@Assets',
   '@Common',
+  '@Contexts',
   '@Components',
   '@Containers',
   '@Epics',
@@ -59,8 +60,7 @@ module.exports = {
           {
             loader: 'ts-loader',
             options: {
-              // transpileOnly: true,
-              happyPackMode: true,
+              transpileOnly: true,
               configFile: path.resolve(__dirname, 'tsconfig.json'),
             },
           },
@@ -144,7 +144,7 @@ module.exports = {
       tsconfig: tsconfigFilePath,
       eslint: true,
       useTypescriptIncrementalApi: true,
-      async: false,
+      async: true,
       checkSyntacticErrors: true,
       reportFiles: [
         'src/**/*.{ts,tsx}',

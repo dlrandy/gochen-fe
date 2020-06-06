@@ -1,10 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import { BrowserRouter } from 'react-router-dom';
+import { AuthProvider } from '@Contexts/auth-context';
 import { App } from './app';
 
 const render = () => {
-  ReactDOM.render(<App />, document.getElementById('root'));
+  ReactDOM.render(
+    <BrowserRouter>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </BrowserRouter>,
+    document.getElementById('root')
+  );
 };
 
 // eslint-disable-next-line no-unused-expressions
