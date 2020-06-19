@@ -5,18 +5,19 @@ type AuthContextProps = {
   login?: () => void;
   logout?: () => void;
   register?: () => void;
+  children?: React.ReactNode;
 };
 const defaultContext = {};
 const AuthContext = React.createContext<AuthContextProps>(defaultContext);
 AuthContext.displayName = 'AuthContext';
 
-function AuthProvider(props: unknown) {
+const AuthProvider: React.FC<AuthContextProps> = props => {
   const user = Math.random() > 0.5 ? 'asfew3v232ser' : '';
 
-  const value = React.useMemo(() => ({ user }), [user]);
+  const value: AuthContextProps = React.useMemo(() => ({ user }), [user]);
 
   return <AuthContext.Provider value={value} {...props} />;
-}
+};
 
 function useAuth() {
   const context = useContext(AuthContext);

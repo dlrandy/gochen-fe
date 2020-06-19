@@ -35,5 +35,8 @@
     "./**/*.js",
     "./**/*.json",
     "./**/*.png"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }

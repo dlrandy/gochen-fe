@@ -3,7 +3,7 @@ import { useAuth } from '@Contexts/auth-context';
 import { useNavigate, useLocation } from 'react-router';
 
 type GuardProps = {
-  children: React.ReactNode;
+  children: React.ReactElement;
   from?: string;
 };
 export default function Index({ children }: GuardProps) {

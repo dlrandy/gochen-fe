@@ -13,5 +13,6 @@ git config --global core.autocrlf false
 - [x] 路由守卫
 - [ ] react-router preloading
 - [ ] react-router focus management
+- [ ] 引入redux
 
 
