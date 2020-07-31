@@ -182,8 +182,8 @@ module.exports = {
       skipWaiting: false,
     }),
     new BundleAnalyzerPlugin({
-      openAnalyzer: false,
-      analyzerMode: 'disabled',
+      openAnalyzer: true,
+      // analyzerMode: 'disabled',
     }),
   ],
   optimization: {
@@ -218,13 +218,17 @@ module.exports = {
       //   plugins: [imageminMozjpeg({quality: 50})]
       // })
       new TerserPlugin({
-        cache: true,
+        // cache: true,
         terserOptions: {
           output: {
             comments: false,
           },
         },
-        extractComments: false,
+        extractComments: all,
+        compress: {
+            drop_console: true,
+            // pure_funcs: ['console.log']
+        },
       }),
       new OptimizeCSSAssetsPlugin({
         cssProcessor: require('cssnano'),
@@ -238,11 +242,16 @@ module.exports = {
       minChunks: 1,
       minSize: 30000,
       cacheGroups: {
-        defaultVendors: {
-          priority: -10,
-          reuseExistingChunk: true,
+        // defaultVendors: {
+        //   priority: -10,
+        //   reuseExistingChunk: true,
+        //   test: /[\\/]node_modules[\\/]/,
+        // },
+        commons: {
+          name: 'vendor',
           test: /[\\/]node_modules[\\/]/,
-        },
+          minChunks: 2
+        }
       },
     },
   },

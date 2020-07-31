@@ -1,20 +1,20 @@
-/* import { combineReducers, createStore, Reducer } from 'redux';
+import { combineReducers, createStore, Reducer } from 'redux';
 import notifications, { NotificationState } from '@Store/notifications/index';
 import reduerRegistry from '@Store/reducerRegistry';
 import reducerRegistry from '@Store/reducerRegistry';
 
 export type StoreState = {
-  notifications?: Array<NotificationState>;
+  notifications?: NotificationState[];
 };
 export const initialState: StoreState = {
   notifications: [],
 };
 
-const combine = reducers => {
+const combine = (reducers: Array<{ [index: string]: Reducer }>) => {
   const reducerNames = Object.keys(reducers);
   Object.keys(initialState).forEach(item => {
     if (reducerNames.indexOf(item) === -1) {
-      reducers[item] = (state = null) => state;
+      reducers[item] = state => state;
     }
   });
   return combineReducers(reducers);
@@ -33,4 +33,3 @@ export default store;
 reducerRegistry.setChangeListener(reducers =>
   store.replaceReducer(combine(reducers))
 );
-*/
